@@ -1,7 +1,8 @@
 import React from 'react'
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-const Button = ({ children }) => {
+import { ThreeDots } from 'react-loader-spinner'
+const Button = ({ children, loading }) => {
   return (
     <button
       css={css`
@@ -11,9 +12,25 @@ const Button = ({ children }) => {
         color: #fff;
         padding: 10px 20px;
         cursor: pointer;
+        display: flex;
+        justify-content; center;
+        align-items; center;
       `}
     >
-      {children}
+      {loading ? (
+        <ThreeDots
+          visible={true}
+          height="30"
+          width="30"
+          color="#fff"
+          radius="9"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      ) : (
+        children
+      )}
     </button>
   )
 }

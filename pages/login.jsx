@@ -2,13 +2,19 @@ import React, { useState } from 'react'
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Input, FormControl, Button } from '@/components'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { AUTH_ACTION } from '@/actions'
 const Login = () => {
   const [formData, setFormData] = useState({})
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault()
-    console.log('form submitted')
-  }
 
+    dispatch(AUTH_ACTION())
+  }
+  const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
+  console.log('auth state', auth)
   const inputChangeHandler = (name, value) => {
     setFormData({
       ...formData,
@@ -17,7 +23,6 @@ const Login = () => {
   }
   return (
     <>
-      {console.log('form values', formData)}
       <div
         css={css`
           display: flex;
@@ -54,7 +59,7 @@ const Login = () => {
             />
           </FormControl>
           <FormControl>
-            <Button>لاگین</Button>
+            <Button loading={auth.loading}>لاگین</Button>
           </FormControl>
         </form>
       </div>
