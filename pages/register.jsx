@@ -3,15 +3,15 @@ import React, { useState } from 'react'
 import { css } from '@emotion/react'
 import { Input, FormControl, Button } from '@/components'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '@/reducers/authSlice'
-const Login = () => {
+import { register } from '@/reducers/registerSlice'
+const Register = () => {
   const dispatch = useDispatch()
-  const auth = useSelector((state) => state.auth)
-  console.log('auth state', auth)
+  const reg = useSelector((state) => state.register)
+  console.log('register state', reg)
   const [formData, setFormData] = useState({})
   const formSubmitHandler = (e) => {
     e.preventDefault()
-    dispatch(login())
+    dispatch(register())
   }
 
   const inputChangeHandler = (name, value) => {
@@ -38,9 +38,18 @@ const Login = () => {
             margin-top: 15px;
           `}
         >
-          لطفا لاگین کنید
+          لطفا ثبت نام کنید
         </h2>
+
         <form onSubmit={(e) => formSubmitHandler(e)}>
+          <FormControl>
+            <Input
+              type="text"
+              placeholder="نام"
+              dir="rtl"
+              changeHandler={(val) => inputChangeHandler('name', val)}
+            />
+          </FormControl>
           <FormControl>
             <Input
               type="email"
@@ -58,7 +67,7 @@ const Login = () => {
             />
           </FormControl>
           <FormControl>
-            <Button loading={auth.loading}>لاگین</Button>
+            <Button loading={reg.loading}>ثبت نام</Button>
           </FormControl>
         </form>
       </div>
@@ -66,4 +75,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register
