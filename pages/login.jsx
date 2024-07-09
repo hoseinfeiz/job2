@@ -2,11 +2,22 @@ import React, { useState } from 'react'
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Input, FormControl, Button } from '@/components'
+import { useDispatch, useSelector } from 'react-redux'
+import { LOGIN_ACTION, selectAuth } from '@/reducers/authSlice'
 const Login = () => {
+  const dispatch = useDispatch()
+  const auth = useSelector(selectAuth)
+  console.log('auth state', auth)
   const [formData, setFormData] = useState({})
   const formSubmitHandler = (e) => {
     e.preventDefault()
-    console.log('form submitted')
+    dispatch(
+      LOGIN_ACTION({
+        loading: true,
+        logged: true,
+        user: formData,
+      })
+    )
   }
 
   const inputChangeHandler = (name, value) => {
@@ -17,7 +28,6 @@ const Login = () => {
   }
   return (
     <>
-      {console.log('form values', formData)}
       <div
         css={css`
           display: flex;
