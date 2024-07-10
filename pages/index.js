@@ -2,7 +2,8 @@ import React from 'react'
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Jobcards } from '@/components'
-const Home = () => {
+import { jobslist } from '@/reducers/jobSlice'
+const Home = ({ jobList, loading }) => {
   return (
     <div
       css={css`
@@ -27,15 +28,16 @@ const Home = () => {
           به کارکده خوش آمدید
         </h1>
       </div>
-      <Jobcards />
+      <Jobcards jobList={jobList} loading={loading} />
     </div>
   )
 }
 
 Home.getInitialProps = async ({ reduxStore }) => {
-  const jobslist = await reduxStore.getState()
-  console.log('reduxStore', jobslist)
-  return reduxStore
+  await reduxStore.dispatch(jobslist())
+  const jobsState = reduxStore.getState().job
+
+  return { jobList: jobsState.jobslist, loading: jobsState.loading }
 }
 
 export default Home

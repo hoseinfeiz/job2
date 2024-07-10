@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react'
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Jobcard } from '..'
-import { useDispatch, useSelector } from 'react-redux'
-import { jobslist } from '@/reducers/jobSlice'
-import { ThreeDots } from 'react-loader-spinner'
-const Jobcards = () => {
-  const dispatch = useDispatch()
-  const jobs = useSelector((state) => state.job)
 
-  console.log('jobs', jobs)
-  useEffect(() => {
-    dispatch(jobslist())
-  }, [])
+import { ThreeDots } from 'react-loader-spinner'
+const Jobcards = ({ jobList, loading }) => {
+  console.log('jobList', jobList)
+  console.log('loading', loading)
+
   return (
     <div
       css={css`
@@ -24,7 +19,7 @@ const Jobcards = () => {
         margin: 20px auto;
       `}
     >
-      {jobs.loading && (
+      {loading && (
         <ThreeDots
           visible={true}
           height="80"
@@ -36,11 +31,9 @@ const Jobcards = () => {
           wrapperClass=""
         />
       )}
-      {!jobs.loading &&
-        jobs.jobslist != null &&
-        jobs.jobslist.jobs.map((job, index) => (
-          <Jobcard key={index} job={job} />
-        ))}
+      {!loading &&
+        jobList != null &&
+        jobList.jobs.map((job, index) => <Jobcard key={index} job={job} />)}
     </div>
   )
 }
