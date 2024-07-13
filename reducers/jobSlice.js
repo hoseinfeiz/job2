@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import fetchUrl from '@/utils/fetchUrl'
 export const jobslist = createAsyncThunk('job', async () => {
   const res = await fetchUrl({
-    url: 'http://127.0.0.1:5000/jobs.json',
+    url: '/jobs.json',
     method: 'GET',
   })
   return res

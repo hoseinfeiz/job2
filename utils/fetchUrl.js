@@ -3,7 +3,9 @@ const DelayMaker = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const fetchUrl = async ({ url, method }) => {
   await DelayMaker(3000)
   try {
-    const res = await fetch(url, { method })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ABSOLUTE_URL}${url}`, {
+      method,
+    })
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`)
     }

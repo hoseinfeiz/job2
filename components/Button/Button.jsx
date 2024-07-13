@@ -2,14 +2,21 @@ import React from 'react'
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { ThreeDots } from 'react-loader-spinner'
-const Button = ({ children, loading }) => {
+const Button = ({
+  children,
+  loading,
+  backColor = '#33e530',
+  color = '#fff',
+  btnClicked,
+}) => {
   return (
     <button
+      onClick={btnClicked}
       css={css`
-        background-color: #33e530;
+        background-color: ${backColor};
         border: none;
         border-radius: 3px;
-        color: #fff;
+        color: ${color};
         padding: 15px 25px;
         cursor: pointer;
       `}

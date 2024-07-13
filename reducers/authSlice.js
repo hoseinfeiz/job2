@@ -3,7 +3,7 @@ import fetchUrl from '@/utils/fetchUrl'
 
 export const login = createAsyncThunk('auth/login', async () => {
   const response = await fetchUrl({
-    url: 'http://localhost:5000/login.json',
+    url: '/login.json',
     method: 'GET',
   })
   return response

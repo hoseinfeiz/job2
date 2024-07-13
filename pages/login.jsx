@@ -20,6 +20,9 @@ const Login = () => {
       [name]: value,
     })
   }
+  console.log('process', process.env.NEXT_PUBLIC_ABSOLUTE_URL)
+  console.log('process', process.env.SECRET_KEY)
+
   return (
     <>
       <div

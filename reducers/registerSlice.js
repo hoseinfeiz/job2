@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import fetchUrl from '@/utils/fetchUrl'
 export const register = createAsyncThunk('auth/register', async () => {
   const res = await fetchUrl({
-    url: 'http://localhost:5000/register.json',
+    url: '/register.json',
     method: 'GET',
   })
   return res
